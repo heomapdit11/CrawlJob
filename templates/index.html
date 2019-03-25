@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>AWESOME JOB - Project Crawl Job</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="{{ url_for('static', filename='css/blog-home.css') }}" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="https://pymi.vn/">PYMI</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <div class="row">
+
+      <!-- Blog Entries Column -->
+      <div class="col-md-8">
+
+        <h1 class="my-4">PYTHON
+          <small>Best job for you</small>
+        </h1>
+      {% for title in job.items %}
+        <!-- Blog Post -->
+        <div class="card mb-4">
+          <div class="card-body">
+            <h2 class="card-title" href="/job/{{ title.iss_id_job }}">{{ title.title_job }}</h2>
+            <a href="/job/{{ title.iss_id_job }}" class="btn btn-primary">Read More &rarr;</a>
+          </div>
+          <div class="card-footer text-muted">
+            {{ title.date_update_job.strftime('%d-%m-%Y') }}
+            <a href="https://www.linkedin.com/in/le-minhthong-a6a725105/">Thông Lê</a>
+          </div>
+        </div>
+      {% endfor %}
+        <!-- Pagination -->
+        <ul class="pagination justify-content-center mb-4">
+          {% for page_num in job.iter_pages() %}
+            {% if page_num %}
+            <li class="page-item"><a class="page-link" href="{{ url_for('show_job', page=page_num) }}">{{ page_num }}</a></li>
+            {% else %}
+            ...
+            {% endif %}
+          {% endfor %}
+        </ul>
+
+      </div>
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Write by Thông Lê Pymi HCM1812</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+</body>
+
+</html>
